@@ -10,7 +10,13 @@ const app = express();
 // cors setup
 const allowedOrigins = ["https://chat-free-with-gemini.netlify.app/", "http://localhost:5173"];
 const corsOptions = {
-    origin: allowedOrigins,
+    origin: function(origin, callback) {
+        if(allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true
 };
 
