@@ -7,8 +7,15 @@ require("dotenv").config();
 // app initialize
 const app = express();
 
+// cors setup
+const allowedOrigins = ["https://chat-free-with-gemini.netlify.app/", "http://localhost:5173"];
+const corsOptions = {
+    origin: allowedOrigins,
+    credentials: true
+};
+
 // middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
